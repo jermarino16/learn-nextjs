@@ -1,7 +1,12 @@
-import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
+import {
+  configureStore,
+  ThunkAction,
+  Action,
+  createAction,
+} from "@reduxjs/toolkit";
 
 import counterReducer from "./redux/slices/counterSlice/counterSlice";
-import { createWrapper } from "next-redux-wrapper";
+import { createWrapper, HYDRATE } from "next-redux-wrapper";
 
 export function makeStore() {
   return configureStore({
@@ -18,5 +23,6 @@ export type AppThunk<ReturnType = void> = ThunkAction<
   unknown,
   Action<string>
 >;
+export const AppHydrate = createAction<AppState>(HYDRATE);
 
 export const wrapper = createWrapper(makeStore, { debug: true });
