@@ -1,34 +1,50 @@
-import type { NextPage } from "next";
 import Head from "next/head";
+import Navbar from "../components/Navbar/Navbar";
 
-import Counter from "../components/counter/Counter";
-import styles from "../styles/Home.module.css";
-import Link from "next/link";
-
-import { GetServerSideProps } from "next";
-import { wrapper } from "../store";
-import { incrementByAmount } from "../redux/slices/counterSlice/counterSlice";
-
-export const getServerSideProps: GetServerSideProps =
-  wrapper.getServerSideProps((store) => async ({ req }) => {
-    store.dispatch(incrementByAmount(10));
-    return { props: {} };
-  });
-
-const IndexPage: NextPage = () => {
+export default function Home() {
   return (
-    <div className={styles.container}>
+    <>
       <Head>
-        <title>Redux Toolkit</title>
+        <title>My Portfolio</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <header className={styles.header}>
-        <img src="/logo.svg" className={styles.logo} alt="logo" />
-        <Counter />
-        <Link href={"/other"}>Go to other page</Link>
-      </header>
-    </div>
-  );
-};
+      <div className="flex flex-col items-center justify-center min-h-screen py-2">
+        <main className="flex flex-col items-center justify-center w-full flex-1 px-20 text-center">
+          <h1 className="text-6xl font-bold">
+            Welcome to{" "}
+            <a className="text-blue-600" href="https://nextjs.org">
+              My Portfolio!
+            </a>
+          </h1>
 
-export default IndexPage;
+          <p className="mt-3 text-2xl">
+            This is a personal portfolio project built with Next.js and Tailwind
+            CSS.
+          </p>
+
+          <div className="flex flex-wrap items-center justify-around max-w-4xl mt-6 sm:w-full">
+            <a
+              href="/about"
+              className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-blue-600 focus:text-blue-600"
+            >
+              <h3 className="text-2xl font-bold">About Me &rarr;</h3>
+              <p className="mt-4 text-xl">
+                Learn more about my background and skills.
+              </p>
+            </a>
+
+            <a
+              href="/projects"
+              className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-blue-600 focus:text-blue-600"
+            >
+              <h3 className="text-2xl font-bold">Projects &rarr;</h3>
+              <p className="mt-4 text-xl">
+                Check out some of my recent projects and experiments.
+              </p>
+            </a>
+          </div>
+        </main>
+      </div>
+    </>
+  );
+}
